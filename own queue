@@ -1,0 +1,102 @@
+//
+// Created by ANDDD on 13.04.2022.
+//
+
+#pragma once
+
+#include <iostream>
+
+class Queue {
+    int capacity;
+    int *mem;
+    int elements;
+
+    int first;
+public:
+
+    Queue():                                                   // write the constructor for Queue which initializes:
+            capacity(10),                                  // capacity to 10
+            mem(new int[capacity]),                   // mem with a new array
+            elements(0),                                   // elements with 0
+
+            first(0)                                        // first with 0
+    {}
+
+    ~Queue(){                       // write a destructor for Queue
+        delete [] mem;
+    }
+
+
+
+    Queue(const Queue &ori)     // write a copy constructor for Queue
+    {
+        capacity=ori.capacity;
+        mem=ori.mem;
+        elements=ori.elements;
+        first=ori.first;
+
+    }
+
+
+    Queue &operator=(Queue cpy){    // write an assignment operator for Queue
+        capacity=cpy.capacity;
+        elements=cpy.elements;
+        std::swap(mem,cpy.mem);
+        return *this;
+    }
+
+
+    void push(int x) {
+        if (capacity == elements) {
+            int *tmp = new int[capacity * 2];// resize the array
+
+            for(int i=0;i<capacity;i++){   // copy elements
+                tmp[i]=mem[i];
+            }
+
+            delete [] mem;
+            mem = tmp;
+            capacity *=2;  // change capactiy
+
+            first =0;   // change first
+
+
+        }
+        int insertion_location = (first + elements) % capacity;
+        mem[insertion_location] = x;
+        elements++;
+
+    }
+
+    bool empty(){
+        if(elements==0)
+            return true;
+        return false;
+    }
+
+
+    void pop() {        // warning: unsafe, make safe
+        if(empty())
+            throw std::runtime_error("pop() called on an empty stack");
+
+        first = (first + 1) % capacity;
+        elements--;
+
+    }
+
+   int front() {
+        if(empty())
+            throw std::runtime_error("front called on an empty stack");
+
+        return mem[first];
+    }
+
+    int size(){
+        return capacity;
+    }
+
+    int &operator[](int x) {
+        return mem[x];
+    }
+};
+
