@@ -1,0 +1,47 @@
+#include <iostream>
+
+struct Node {
+    int value;
+    Node *next;
+
+    Node(int _value):
+            value(_value),
+            next(nullptr)
+    {}
+};
+
+
+int main() {
+    Node *head = nullptr;
+    for (int i = 100; i > 0 ; i--) {    //create
+        Node *tmp = new Node(i);
+        tmp->next = head;
+        head = tmp;
+    }
+
+    Node *tmp = head;       //show
+    while (tmp != nullptr) {
+        std::cout << tmp->value << ", ";
+        tmp = tmp->next;
+    }
+    std::cout << std::endl;
+
+
+    if (head != nullptr) {  //delete one
+        Node *tmp = head;
+        head = head->next;
+        delete tmp;
+    }
+
+
+    while (head != nullptr) {       //delete everything
+        Node *tmp = head;
+        head = head->next;
+        delete tmp;
+    }
+
+
+
+
+    return 0;
+}
