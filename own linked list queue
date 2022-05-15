@@ -59,10 +59,11 @@ public:
         }
     }
 
-
-    ~Queue() {
-        pop();
+     ~Queue() {
+        while(!empty())
+            pop();
     }
+
 
     Queue(const Queue& original):head(nullptr),tail(nullptr),elements(0){
         Node *tmp = original.head;
