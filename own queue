@@ -38,12 +38,21 @@ public:
     }
 
 
-    Queue &operator=(Queue cpy){    // write an assignment operator for Queue
-        capacity=cpy.capacity;
-        elements=cpy.elements;
-        std::swap(mem,cpy.mem);
-        return *this;
+      Queue &operator=(const Queue &original){    // write an assignment operator for Queue
+        if(this!=&original){
+            if(mem != nullptr)
+                delete [] mem;
+
+            capacity = original.capacity;
+            elements=original.elements;
+            mem = new int[capacity];
+            for(int i=0;i<elements;i++){
+                mem[i]=original.mem[i];
+            }
+        }
+       return *this;
     }
+
 
 
     void push(int x) {
