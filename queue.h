@@ -1,6 +1,3 @@
-//
-// Created by ANDDD on 13.04.2022.
-//
 
 #pragma once
 
@@ -14,21 +11,21 @@ class Queue {
     int first;
 public:
 
-    Queue():                                                   // write the constructor for Queue which initializes:
-            capacity(10),                                  // capacity to 10
-            mem(new int[capacity]),                   // mem with a new array
-            elements(0),                                   // elements with 0
+    Queue():                                                   
+            capacity(10),                                  
+            mem(new int[capacity]),                  
+            elements(0),                                   
 
-            first(0)                                        // first with 0
+            first(0)                                        
     {}
 
-    ~Queue(){                       // write a destructor for Queue
+    ~Queue(){                       
         delete [] mem;
     }
 
 
 
-     Queue(const Queue &ori)     // write a copy constructor for Queue
+     Queue(const Queue &ori)     
     {
         capacity=ori.capacity;
         mem=ori.mem;
@@ -42,7 +39,7 @@ public:
     }
 
 
-      Queue &operator=(const Queue &original){    // write an assignment operator for Queue
+      Queue &operator=(const Queue &original){    
         if(this!=&original){
             if(mem != nullptr)
                 delete [] mem;
@@ -61,17 +58,17 @@ public:
 
     void push(int x) {
         if (capacity == elements) {
-            int *tmp = new int[capacity * 2];// resize the array
+            int *tmp = new int[capacity * 2];
 
-            for(int i=0;i<capacity;i++){   // copy elements
+            for(int i=0;i<capacity;i++){   
                 tmp[i]=mem[i];
             }
 
             delete [] mem;
             mem = tmp;
-            capacity *=2;  // change capactiy
+            capacity *=2;  
 
-            first =0;   // change first
+            first =0;  
 
 
         }
@@ -88,7 +85,7 @@ public:
     }
 
 
-    void pop() {        // warning: unsafe, make safe
+    void pop() {        
         if(empty())
             throw std::runtime_error("pop() called on an empty stack");
 
