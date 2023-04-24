@@ -48,57 +48,71 @@ public:
     }
 
 
-    void push_back(int x) {
-        if(empty()){
-            head = new Node(x);
-            tail=head;
-
-        }
-        else {
-            Node *tmp = new Node(x);
-            tail->next = tmp;
-            tmp->prev = tail;
-            tail = tmp;
+       void push_front(int value) {
+        Node *new_node = new Node(value);
+        if (!head) {
+            head = new_node;
+            tail = new_node;
+        } else {
+            head->prev = new_node;
+            new_node->next = head;
+            head = new_node;
         }
     }
 
-    void push_front(int x) {
-        if(empty())
-            throw std::runtime_error("push_front called on empty deque");
-        else{
-            Node *tmp = new Node(x);
-            head->prev = tmp;
-            tmp->next = head;
-            head = tmp;
+    void push_back(int value) {
+        Node *new_node = new Node(value);
+        if (!tail) {
+            head = new_node;
+            tail = new_node;
+        } else {
+            tail->next = new_node;
+            new_node->prev = tail;
+            tail = new_node;
         }
-
-    }
-
-    void pop_back() {
-        if(tail == nullptr)
-            throw std::runtime_error("pop back called on empty deque");
-        else if(tail == head){
-            delete tail;
-            tail = head = nullptr;
-        }
-        else{
-        Node *tmp = tail;
-            tail = tail->prev;
-            delete tmp;
-    }
     }
 
     void pop_front() {
-        if (empty()) {
-            throw std::runtime_error("pop on an empty stack");
-        }
-        if (head == tail) {
+        if (!head) {
+            throw std::runtime_error("pop_front() called on an empty list");
+        } else if (head == tail) {
             delete head;
-            head = tail = nullptr;
+            head = nullptr;
+            tail = nullptr;
         } else {
+            Node *temp = head;
             head = head->next;
-            delete head->prev;
             head->prev = nullptr;
+            delete temp;
+        }
+    }
+
+    void pop_back() {
+        if (!tail) {
+            throw std::runtime_error("pop_back() called on an empty list");
+        } else if (head == tail) {
+            delete head;
+            head = nullptr;
+            tail = nullptr;
+        } else {
+            Node *temp = tail;
+            tail = tail->prev;
+            tail->next = nullptr;
+            delete temp;
+        }
+    }
+
+    void remove(Node *node) {
+        if (!node) {
+            throw std::runtime_error("remove() called with nullptr");
+        } else if (node == head) {
+            pop_front();
+        } else if (node == tail) {
+            pop_back();
+        } else {
+            node->prev->next = node->next;
+            node->next->prev = node->prev;
+            delete node;
         }
     }
 
