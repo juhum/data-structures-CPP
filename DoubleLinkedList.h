@@ -243,5 +243,3 @@ public:
 
 };
 
-int main()
-{
