@@ -44,12 +44,15 @@ public:
         return false;
     }
 
+    
     void pop_back() {
-        if (empty()) {
-            throw std::runtime_error("pop() called on an empty stack");
-        }
-        elements--;
+    if (empty()) {
+        throw std::runtime_error("pop() called on an empty vector");
     }
+    elements--;
+    delete &mem[elements];
+    }
+
 
     int back() {
         if (empty()) {
@@ -141,8 +144,3 @@ public:
 };
 
 
-
-int main() {
-
-return 0;
-}
