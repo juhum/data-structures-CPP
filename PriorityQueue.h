@@ -42,6 +42,10 @@ public:
             tmp->next = head;
             head = tmp;
         }
+        else if (p <= tail->priority) {
+            tail->next = tmp;
+            tail = tmp;
+        }
         else {
             Node *current = head;
             while (current->next != nullptr && current->next->priority > tmp->priority) {
@@ -49,11 +53,9 @@ public:
             }
             tmp->next = current->next;
             current->next = tmp;
-            if (tail->next != nullptr) {
-                tail = tail->next;
-            }
         }
     }
+
 
     bool empty() const {
         return head == nullptr;
