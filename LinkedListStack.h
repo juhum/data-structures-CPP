@@ -57,16 +57,12 @@ public:
 
     Stack(const Stack& original):head(nullptr) {
         if (!original.empty()) {
-            // copy the first value from original if it exists
             head = new Node(original.head->value);
 
-            // set up two pointers which will iterate through both stacks
             Node *src = original.head->next;
             Node *dst = head;
 
             while (src != nullptr) {
-                // create a new Node with the value from src
-                // and save its pointer to dst->next
                 dst->next = new Node(src->value);
 
                 // move both pointers
