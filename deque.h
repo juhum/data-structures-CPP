@@ -1,6 +1,3 @@
-//
-// Created by ANDDD on 13.04.2022.
-//
 
 #pragma once
 
@@ -16,21 +13,21 @@ class Deque {
 
 public:
 
-    Deque():                                                   // write the constructor for Queue which initializes:
-            capacity(10),                                  // capacity to 10
-            mem(new int[capacity]),                   // mem with a new array
-            elements(0),                                   // elements with 0
+    Deque():                                                   
+            capacity(10),                                  
+            mem(new int[capacity]),                   
+            elements(0),                                   
 
-            first(0)                                    // first with 0
+            first(0)                                   
     {}
 
-    ~Deque(){                       // write a destructor for Queue
+    ~Deque(){                       
         delete [] mem;
     }
 
 
 
-    Deque(const Deque &ori)     // write a copy constructor for Queue
+    Deque(const Deque &ori)     
     {
         capacity=ori.capacity;
         mem=ori.mem;
@@ -40,7 +37,7 @@ public:
     }
 
 
-    Deque &operator=(Deque cpy){    // write an assignment operator for Queue
+    Deque &operator=(Deque cpy){    
         capacity=cpy.capacity;
         elements=cpy.elements;
         std::swap(mem,cpy.mem);
@@ -50,17 +47,17 @@ public:
 
     void push_back(int x) {
         if (capacity == elements) {
-            int *tmp = new int[capacity * 2];// resize the array
+            int *tmp = new int[capacity * 2];
 
-            for(int i=0;i<capacity;i++){   // copy elements
+            for(int i=0;i<capacity;i++){   
                 tmp[i]=mem[i];
             }
 
             delete [] mem;
             mem = tmp;
-            capacity *=2;  // change capactiy
+            capacity *=2;  
 
-            first =0;   // change first
+            first =0;   
 
 
         }
@@ -107,13 +104,14 @@ public:
     }
 
 
-    void pop_front() {        // warning: unsafe, make safe
-        if(empty())
-            throw std::runtime_error("pop_front() called on an empty stack");
+void pop_front() {
+    if(empty())
+        throw std::runtime_error("pop_front() called on an empty stack");
 
-        first = (first + 1) % capacity;
-         elements-1;
-    }
+    first = (first + 1) % capacity;
+    elements--;
+}
+
 
     void pop_back(){
         if(empty())
