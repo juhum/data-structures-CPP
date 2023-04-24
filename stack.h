@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdexcept> // allows us to use the standard exceptions defined by C++
+#include <stdexcept> 
 
 class Stack {
     int capacity;
@@ -9,18 +9,18 @@ class Stack {
 
 public:
     Stack():
-            capacity(10),           // initialize size of memory with some number, say 10
-            mem(new int[capacity]), // allocate the memory
-            elements(0)             // this is the same as before, there are no elements in the Stack
+            capacity(10),           
+            mem(new int[capacity]), 
+            elements(0)            
     {
-        // and still no body
+        
     }
 
     void push(int x) {
         if (capacity == elements) { // 1.
             int *tmp = new int[capacity * 2]; // 1.1.
 
-            // 1.2
+            
             for (int i = 0 ; i < capacity ; i++) {
                 tmp[i] = mem[i];
             }
@@ -31,7 +31,7 @@ public:
         }
         mem[elements] = x;
          elements++;
-        // write the rest of push
+        
     }
 
         bool empty(){
@@ -56,29 +56,11 @@ public:
             return mem[elements - 1];
     }
 
-    // add pop, empty, and top
-    // remember about exceptions
+  
 
     ~Stack() {
-        // we have to free only dynamically allocated memory
         delete [] mem;
     }
 };
 
 
-int main() {
-    Stack s;
-    s.push(1);
-    s.push(2);
-    s.push(3);
-    std::cout << s.top() << std::endl;
-    s.pop();
-    std::cout << s.top() << std::endl;
-    s.push(4);
-    std::cout << s.top() << std::endl;
-    s.pop();
-    std::cout << s.top() << std::endl;
-
-
-    return 0;
-}
