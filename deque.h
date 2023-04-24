@@ -27,14 +27,17 @@ public:
 
 
 
-    Deque(const Deque &ori)     
-    {
-        capacity=ori.capacity;
-        mem=ori.mem;
-        elements=ori.elements;
-        first=ori.first;
+    Deque(const Deque &ori) {
+        capacity = ori.capacity;
+        elements = ori.elements;
+        first = ori.first;
+        mem = new int[capacity];
 
+        for (int i = 0; i < capacity; i++) {
+            mem[i] = ori.mem[i];
+        }
     }
+
 
 
     Deque &operator=(Deque cpy){    
@@ -69,33 +72,33 @@ public:
 
     }
 
-    void push_front(int x){
-        if ( capacity==elements) {
+    void push_front(int x) {
+        if (capacity == elements) {
             int *tmp = new int[capacity * 2];
 
-            for(int i=0;i<capacity;i++){
-                tmp[i]=mem[i];
+            for (int i = 0; i < capacity; i++) {
+                tmp[i] = mem[i];
             }
 
-            delete [] mem;
+            delete[] mem;
             mem = tmp;
-            capacity *=2;
+            capacity *= 2;
 
-            first =0;
+            first = 0;
         }
 
         elements++;
 
         int temp;
-        for(int i=0;i<(capacity-1);i++){
-            temp=mem[capacity-1];
-            mem[capacity-1]=mem[i];
-            mem[i]=temp;
+        for (int i = 0; i < (capacity - 1); i++) {
+            temp = mem[capacity - 1];
+            mem[capacity - 1] = mem[i];
+            mem[i] = temp;
         }
 
         mem[0] = x;
-
     }
+
 
     bool empty(){
         if(elements==0)
